@@ -1,0 +1,17 @@
+#
+# emacs restclient-mode
+#
+
+POST http://127.0.0.1:5000/api/tokens/create
+Content-Type: application/json
+
+{
+        "tokenName": "tokenName",
+        "symbol": "symbol",
+        "maxSupply": 1000,
+        "decimals": 100,
+        "genesisSupply": 999
+}
+
+#
+#
