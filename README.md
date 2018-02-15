@@ -66,8 +66,6 @@ REST API is implemented as a [python script](https://github.com/e-mine1/e-mine-w
 |                    |         |                             |    "MyMintableToken",                        |
 |                    |         |                             |    "MyPausableToken",                        |
 |                    |         |                             |    "MyStandardToken" ]}                      |
-|                    |         |                             |                                              |
-|                    |         |                             |                                              |
 | /api/tokens/create | POST    | tokenName=[string]          | {"created": [datetime],                      |
 |                    |         | symbol=[string]             |  "key": [uuid],                              |
 |                    |         | maxSupply=[integer]         |  "status":                                   |
