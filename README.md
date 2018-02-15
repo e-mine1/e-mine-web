@@ -24,10 +24,10 @@ Following [token templates](https://github.com/e-mine1/e-mine-web/tree/master/so
 
 Each template contains placeholders for custom user parameters provided by the client application. Currently, the 
 following parameters are supported
-* Token name - Name of a token.
-* Token symbol - Symbol representing the token.
-* Decimals - Divisibility of a token, i.e. number of decimal places when displaying token value.
-* Initial supply - Initial supply of tokens.
+* *Token name* - Name of a token.
+* *Token symbol* - Symbol representing the token.
+* *Decimals* - Divisibility of a token, i.e. number of decimal places when displaying token value.
+* *Initial supply* - Initial supply of tokens.
 
 E.g. following code snippet shows placeholders for the Standard token template:
 
@@ -85,7 +85,7 @@ REST API is implemented as a [python script](https://github.com/e-mine1/e-mine-w
 
 ## Running the examples
 
-<TO-DO>
+**TO-DO**
 
 ## Useful links
 - https://ethereum.stackexchange.com/questions/23279/steps-to-deploy-a-contract-using-metamask-and-truffle
