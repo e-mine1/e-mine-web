@@ -18,8 +18,6 @@ TRUFFLE_DEPLOY_SCRIPT = os.path.join(HOME, 'solidity_assets/1_initial_migration.
 SUPPORTED_TEMPLATES = ['MyBasicToken', 'MyBurnableToken', 'MyCappedToken', 'MyERC721Token',
                        'MyERC827Token', 'MyMintableToken', 'MyPausableToken', 'MyStandardToken']
 
-import logging
-
 
 def replace_placeholders(keyword_map, source_path):
     source = ''
