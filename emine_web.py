@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from solc_wrapper import compile_sol, SOLIDITY_TEMPLATE_ROOT
+from solc_wrapper import compile_sol, SOLIDITY_TEMPLATE_ROOT, SUPPORTED_TEMPLATES
 import db
 import os
 
@@ -19,10 +19,17 @@ def requests_status(id):
     if not id or not db.has_token(id):
         return jsonify(error='invalid id'), 400
 
-
     token = db.get_token(id)
-    print(token)
     return jsonify(token), 200
+
+@app.route('/api/tokens/types', methods=['GET'])
+def tokens_addr('/api/tokens/<addr>'):
+    pass
+
+@app.route('/api/tokens/types', methods=['GET'])
+def tokens_meta_types():
+    return jsonify(types=SUPPORTED_TEMPLATES), 200
+
 
 @app.route('/api/tokens/create', methods=['post'])
 def tokens_create():
@@ -34,10 +41,13 @@ def tokens_create():
 
     print('here')
     payload = request.get_json()
-    required = ['tokenName', 'symbol', 'maxSupply', 'decimals', 'genesisSupply']
+    required = ['tokenName', 'symbol', 'maxSupply', 'decimals', 'genesisSupply', 'tokenType']
     for r in required:
         if r not in payload:
             return jsonify(error='Missing required param {} in request'.format(r)), 400
+
+    if payload.get('tokenType') not in SUPPORTED_TEMPLATES:
+        return jsonify(error='Not supported tokentype'), 400
 
     propMap = {"token_name": str(payload.get('tokenName')),
                'token_symbol': str(payload.get('symbol')),
@@ -45,8 +55,8 @@ def tokens_create():
                'token_initial_supply': str(payload.get('genesisSupply'))
                }
 
-    contract_template_name = 'MyStandardToken'
-    contract_template_path = os.path.join(SOLIDITY_TEMPLATE_ROOT, 'MyStandardToken.sol')
+    contract_template_name = payload.get('tokenType')
+    contract_template_path = os.path.join(SOLIDITY_TEMPLATE_ROOT, contract_template_name + '.sol')
 
     request_token = db.create_request_token()
     request_id = request_token.get('key')

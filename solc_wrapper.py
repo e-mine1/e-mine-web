@@ -3,17 +3,20 @@ import logging
 import time
 import threading
 from distutils.dir_util import copy_tree
-from db import create_request_token, update_token, has_token
 
 TEMPLATE_SRC_LOCATION = 'solidity_assets/contract_template.sol'
 
 HOME = os.path.dirname(os.path.realpath(__file__))
 
 SOLIDITY_TEMPLATE_ROOT = os.path.join(HOME, './solidity_assets/zeppelin_contracts/Emine_templates')
+
 TRUFFLE_BIN = '/usr/local/bin/truffle'
 TRUFFLE_TEMPLATE_DIR = os.path.join(HOME, 'truffle_template')
 TRUFFLE_WORK_DIR = os.path.join(HOME, 'truffle_workdir')
 TRUFFLE_DEPLOY_SCRIPT = os.path.join(HOME, 'solidity_assets/1_initial_migration.js')
+
+SUPPORTED_TEMPLATES = ['MyBasicToken', 'MyBurnableToken', 'MyCappedToken', 'MyERC721Token',
+                       'MyERC827Token', 'MyMintableToken', 'MyPausableToken', 'MyStandardToken']
 
 
 def replace_placeholders(keyword_map, source_path):
@@ -124,43 +127,3 @@ if __name__ == '__main__':
     contract_template_name = 'MyStandardToken'
     contract_template_path = os.path.join(SOLIDITY_TEMPLATE_ROOT, 'MyStandardToken.sol')
     compile_sol(contract_template_path, contract_template_name, map, on_compiled)
-
-# compile_sol(src)
-
-
-
-# ts = int(time.time())
-# compilation_dir = 'truffle_' + str(ts)
-# working_dir = os.path.join(TRUFFLE_WORKDIR, compilation_dir)
-# copy_tree(TRUFFLE_TEMPLATE, working_dir)
-# print('copying to ' + working_dir)
-#
-# with open(os.path.join(working_dir, 'contracts/Contract.sol'), 'w') as f:
-#     f.write(sol_code)
-#
-#     os.chdir(working_dir)
-#     print(working_dir)
-#
-#     # cmd = 'truffle compile'.format(TRUFFLE_BIN)
-#     # p = subprocess.Popen([TRUFFLE_BIN, 'compile'], stdout=subprocess.PIPE)
-#
-#     # print(p.communicate())
-#
-#     # process = subprocess.Popen(cmd.split(' '), stdout=subprocess.PIPE)
-#     # output, error = process.communicate()
-#     # print(output)
-#
-# pool = Pool(max_workers=1)
-# compile_thread = pool.submit(subprocess.call, "{} compile".format(TRUFFLE_BIN), shell=True)
-#
-# def on_migration_done(future):
-#     print('migration done')
-#     pass
-#
-# def on_compile_done(future):
-#     print('compilation done')
-#     migration_thread = pool.submit(subprocess.call, "{} migrate".format(TRUFFLE_BIN), shell=True)
-#     migration_thread.add_done_callback(on_migration_done)
-#     pass
-#
-# compile_thread.add_done_callback(on_compile_done)
