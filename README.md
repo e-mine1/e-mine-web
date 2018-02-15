@@ -34,7 +34,7 @@ uint8 public constant decimals = %token_decimals%;
 uint256 public constant INITIAL_SUPPLY = %token_initial_supply%;
 ```
 
-Provided values can then be used in smart contract functions, such as in the following example of MyStandardToken constructor that gives initial coin supply to msg.sender:
+Provided values can then be used in smart contract functions, such as in the following example of *MyStandardToken()* constructor that gives initial coin supply to *msg.sender*:
 
 ```
 function MyStandardToken() public {
@@ -43,7 +43,6 @@ function MyStandardToken() public {
    Transfer(0x0, msg.sender, INITIAL_SUPPLY);
 }
 ```
-
 
 Each template can be easily extended to introduce new smart contract (token) parameters and functions according to the specific user requirements.
 
