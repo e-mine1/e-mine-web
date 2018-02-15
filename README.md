@@ -54,24 +54,23 @@ Each template can be easily extended to introduce new smart contract (token) par
 
 REST API is implemented as a [python script](https://github.com/e-mine1/e-mine-web/blob/master/emine_web.py) with the following supported operations:
 
-| API URL            | Method  | Required/Optional variables | Expected response                            |
-|:------------------ |:-------:|:--------------------------- |:-------------------------------------------  | 
-| /api/requests/<id> | GET     | id=[integer]                |                                              |
-| /api/tokens/types  | GET     |                             | { "types": [                                 |
-|                    |         |                             |    "MyBasicToken",                           |
-|                    |         |                             |    "MyBurnableToken",                        |
-|                    |         |                             |    "MyCappedToken",                          |
-|                    |         |                             |    "MyERC721Token",                          |
-|                    |         |                             |    "MyERC827Token",                          |
-|                    |         |                             |    "MyMintableToken",                        |
-|                    |         |                             |    "MyPausableToken",                        |
-|                    |         |                             |    "MyStandardToken" ]}                      |
-| /api/tokens/create | POST    | tokenName=[string]          | {"created": [datetime],                      |
-|                    |         | symbol=[string]             |  "key": [uuid],                              |
-|                    |         | maxSupply=[integer]         |  "status":                                   |
-|                    |         | decimals=[integer]          |     "success" or "pending" or "failure",     | 
-|                    |         | genesisSupply=[integer]     |  "token_abi": [base64 encoded JSON value]}   |
-|                    |         |                             |                                              |
+| API URL            | Method  | Required/Optional variables | Expected response                                             |
+|:------------------ |:-------:|:--------------------------- |:------------------------------------------------------------- | 
+| /api/requests/<id> | GET     | id=[integer]                |                                                               |
+| /api/tokens/types  | GET     |                             | { "types": [                                                  |
+|                    |         |                             |    &nbsp; &nbsp; "MyBasicToken",                              |
+|                    |         |                             |    &nbsp; &nbsp; "MyBurnableToken",                           |
+|                    |         |                             |    &nbsp; &nbsp; "MyCappedToken",                             |
+|                    |         |                             |    &nbsp; &nbsp; "MyERC721Token",                             |
+|                    |         |                             |    &nbsp; &nbsp; "MyERC827Token",                             |
+|                    |         |                             |    &nbsp; &nbsp; "MyMintableToken",                           |
+|                    |         |                             |    &nbsp; &nbsp; "MyPausableToken",                           |
+|                    |         |                             |    &nbsp; &nbsp; "MyStandardToken" ]}                         |
+| /api/tokens/create | POST    | tokenName=[string]          | {&nbsp; &nbsp; "created": [datetime],                         |
+|                    |         | symbol=[string]             |  &nbsp; &nbsp; "key": [uuid],                                 |
+|                    |         | maxSupply=[integer]         |  &nbsp; &nbsp; "status": "success" or "pending" or "failure", |
+|                    |         | decimals=[integer]          |  &nbsp; &nbsp; "token_abi": [base64 encoded JSON value]}      |                                              | 
+|                    |         | genesisSupply=[integer]     |                                                               |
 
 
 ## Useful links
