@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from solc_wrapper import compile_sol, SOLIDITY_TEMPLATE_ROOT, SUPPORTED_TEMPLATES
+from solc_compile_deploy import compile_sol, SOLIDITY_TEMPLATE_ROOT, SUPPORTED_TEMPLATES
 import db
 import os
 
@@ -39,7 +39,6 @@ def tokens_create():
     except Exception:
         return jsonify(error='Invalid content-type given'), 500
 
-    print('here')
     payload = request.get_json()
     required = ['tokenName', 'symbol', 'maxSupply', 'decimals', 'genesisSupply', 'tokenType']
     for r in required:
@@ -55,6 +54,7 @@ def tokens_create():
                'token_initial_supply': str(payload.get('genesisSupply'))
                }
 
+    print(propMap)
     contract_template_name = payload.get('tokenType')
     contract_template_path = os.path.join(SOLIDITY_TEMPLATE_ROOT, contract_template_name + '.sol')
 
