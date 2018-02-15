@@ -1,6 +1,6 @@
 pragma solidity ^0.4.18;
 
-import "../../token/ERC20/BurnableToken.sol";
+import "../token/ERC20/BurnableToken.sol";
 
 /**
  * @title E-Mine Burnable Token Template

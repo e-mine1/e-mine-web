@@ -1,11 +1,11 @@
 pragma solidity ^0.4.18;
 
-import "../../token/ERC827/ERC827Token.sol";
+import "../token/ERC20/CappedToken.sol";
 
 /**
- * @title E-Mine ERC827 Token Template
+ * @title E-Mine Capped Token Template
  */
-contract MyERC827Token is ERC827Token {
+contract MyCappedToken is CappedToken {
 
   string public constant name = "%token_name%"; // solium-disable-line uppercase
   string public constant symbol = "%token_symbol%"; // solium-disable-line uppercase
