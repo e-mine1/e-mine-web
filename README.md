@@ -15,7 +15,8 @@ Following token templates are provided:
 |          | Capped token            | Mintable token with a token cap                                              |
 |          | Burnable token          | Token that can be irreversibly burned (destroyed)                            |
 | ERC721   | Generic ERC721 token    | Generic implementation for the required functionality of the ERC721 standard |
-| ERC827   | Generic ERC827 token    | Implementation of the ERC827, following the ERC20 standard with extra methods to transfer value and data and execute calls in transfers and approvals |
+| ERC827   | Generic ERC827 token    | ERC827 implementation - ERC20 standard with extra methods to transfer value  | 
+|          |                         | and data and execute calls in transfers and approvals                        |
 
 
 
