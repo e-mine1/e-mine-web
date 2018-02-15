@@ -50,7 +50,7 @@ function MyStandardToken() public {
 
 Each template can be easily extended to introduce new smart contract (token) parameters and functions according to the specific user requirements.
 
-#REST API
+## REST API
 
 REST API is implemented as a [python script](https://github.com/e-mine1/e-mine-web/blob/master/emine_web.py) with the following supported operations:
 
