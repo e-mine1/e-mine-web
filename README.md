@@ -27,7 +27,7 @@ following parameters are supported
 
 E.g. following code snippet shows placeholders for the Standard token template:
 
-```java
+```python
 string public constant name = "%token_name%";
 string public constant symbol = "%token_symbol%"; 
 uint8 public constant decimals = %token_decimals%;
@@ -36,7 +36,7 @@ uint256 public constant INITIAL_SUPPLY = %token_initial_supply%;
 
 Provided values can then be used in smart contract functions, such as in the following example of *MyStandardToken()* constructor that gives initial coin supply to *msg.sender*:
 
-```java
+```python
 function MyStandardToken() public {
    totalSupply_ = INITIAL_SUPPLY;
    balances[msg.sender] = INITIAL_SUPPLY;
