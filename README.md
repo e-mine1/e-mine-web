@@ -6,19 +6,16 @@ As a basis for token creation we use [OpenZeppelin](https://github.com/OpenZeppe
 For each token type a template is provided, implemented as an extended class of corresponding OpenZeppelin token implementation.
 Following token templates are provided:
 
-| Standard |      Token           | Description                                        |
-|:-------- |:-------------------- |:-------------------------------------------------- | 
-| ERC20    | Standard token       | Implementation of the basic standard token         |
-|          | Basic token          | Standard token with no allowances                  |
-|          | Pausable token       | Standard token modified with pausable transfers    |
-|          | Mintable token       | A Simple ERC20 with mintable token creation        |
-|          | Capped token         | Mintable token with a token cap                    |
-|          | Burnable token       | Token that can be irreversibly burned (destroyed)  |
-| ERC721   | Generic ERC721 token | Generic implementation for the required            |
-|          |                      | functionality of the ERC721 standard               |
-| ERC827   | Generic ERC827 token | Implementation of the ERC827, following the ERC20  |
-|          |                      | standard with extra methods to transfer value and  |
-|          |                      | data and execute calls in transfers and approvals  |
+| Standard |      Token           | Description                                                                  |
+|:-------- |:-------------------- |:---------------------------------------------------------------------------- | 
+| ERC20    | Standard token       | Implementation of the basic standard token                                   |
+|          | Basic token          | Standard token with no allowances                                            |
+|          | Pausable token       | Standard token modified with pausable transfers                              |
+|          | Mintable token       | A Simple ERC20 with mintable token creation                                  |
+|          | Capped token         | Mintable token with a token cap                                              |
+|          | Burnable token       | Token that can be irreversibly burned (destroyed)                            |
+| ERC721   | Generic ERC721 token | Generic implementation for the required functionality of the ERC721 standard |
+| ERC827   | Generic ERC827 token | Implementation of the ERC827, following the ERC20 standard with extra methods to transfer value and data and execute calls in transfers and approvals |
 
 
 
