@@ -1,6 +1,7 @@
 from tinydb import TinyDB, Query
 import os
 import uuid
+import base64
 
 from datetime import datetime, timezone
 
@@ -21,6 +22,7 @@ def create_request_token():
         'key': key,
         'status': 'pending',
         'token_addr': None,
+        'token_abi': None,
         'created': d,
         'updated': d,
         'version': 0
@@ -44,7 +46,7 @@ def get_token(key):
         return None
 
 
-def update_token(key, status=None, token_addr=None):
+def update_token(key, status=None, token_addr=None, token_abi=None):
     results = db.search(Creation.key == key)
     if results:
         token = results[0]
@@ -54,6 +56,10 @@ def update_token(key, status=None, token_addr=None):
             change = True
         if token_addr:
             token['token_addr'] = token_addr
+            change = True
+
+        if token_abi:
+            token['token_abi'] = base64.b64encode(token_abi.encode()).decode('utf-8')
             change = True
 
         if change:

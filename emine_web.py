@@ -22,9 +22,9 @@ def requests_status(id):
     token = db.get_token(id)
     return jsonify(token), 200
 
-@app.route('/api/tokens/types', methods=['GET'])
-def tokens_addr('/api/tokens/<addr>'):
-    pass
+# @app.route('/api/tokens/types', methods=['GET'])
+# def tokens_addr('/api/tokens/<addr>'):
+#     pass
 
 @app.route('/api/tokens/types', methods=['GET'])
 def tokens_meta_types():
@@ -74,13 +74,13 @@ def render_error(msg):
     return jsonify({'error', msg})
 
 
-def on_compiled_and_deployed(status, addr, request_id):
+def on_compiled_and_deployed(status=None, token_addr=None, token_abi=None, request_id=None):
     db_status = 'success'
-    db_token_addr = addr if status else None
+    db_token_addr = token_addr if status else None
     if not status:
         db_status = 'failed'
 
-    db.update_token(request_id, status=db_status, token_addr=db_token_addr)
+    db.update_token(request_id, status=db_status, token_addr=db_token_addr, token_abi=token_abi)
 
 
 if __name__ == '__main__':

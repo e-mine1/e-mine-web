@@ -6,17 +6,18 @@ POST http://127.0.0.1:5000/api/tokens/create
 Content-Type: application/json
 
 {
-        "tokenName": "tokenName",
+        "tokenName": "Hello",
         "symbol": "symbol",
         "maxSupply": 1000,
         "decimals": 0,
-        "genesisSupply": 999
+        "genesisSupply": 999,
+        "tokenType": "MyStandardToken"
 }
 
 #
 #
 
-GET http://127.0.0.1:5000/api/requests/02306730-a09d-42f8-af9a-f2ce2e8213b3
+GET http://127.0.0.1:5000/api/requests/339cd408-2284-4a41-bb68-04e89b976d54
 
 #
 #

@@ -18,6 +18,8 @@ TRUFFLE_DEPLOY_SCRIPT = os.path.join(HOME, 'solidity_assets/1_initial_migration.
 SUPPORTED_TEMPLATES = ['MyBasicToken', 'MyBurnableToken', 'MyCappedToken', 'MyERC721Token',
                        'MyERC827Token', 'MyMintableToken', 'MyPausableToken', 'MyStandardToken']
 
+import logging
+
 
 def replace_placeholders(keyword_map, source_path):
     source = ''
@@ -87,11 +89,6 @@ class CompileThread:
         replace_placeholders_file(self.contract_template_map,
                                   self.contract_template_path, contract_path)
 
-        # with open(os.path.join(working_dir, 'contracts/{}.sol'.format(self.source_name)), 'w') as f:
-        #     f.write(self.source)
-        # pass
-
-
         compile_code = os.system("{} compile >> {}/log.txt".format(TRUFFLE_BIN, working_dir))
         print('complation finished with code ' + str(compile_code))
 
@@ -103,15 +100,20 @@ class CompileThread:
         with open(addr_file, 'r') as f:
             addr = f.read()
 
+        abi_file = os.path.join(working_dir, 'build/contracts/{}.json'.format(self.contract_name))
+        with open(abi_file, 'r') as f:
+            abi = f.read()
+
         success = False
         if addr and addr.startswith('0x'):
             success = True
 
         if self.callback_on_done is not None:
-            self.callback_on_done(success, addr, self.request_id)
+            self.callback_on_done(success, addr, abi, self.request_id)
 
 
 if __name__ == '__main__':
+    # this is just test code
     tokenName = 'emine'
     symbol = 'emine'
     maxSupply = 1000
