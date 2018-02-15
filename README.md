@@ -24,10 +24,10 @@ Following token templates are provided:
 
 Each template contains placeholders for custom user parameters provided by the client application. Currently, the 
 following parameters are supported
-* Token name
-* Token symbol
-* Decimals
-* Initial supply
+* Token name - Name of a token.
+* Token symbol - Symbol representing the token.
+* Decimals - Divisibility of a token, i.e. number of decimal places when displaying token value.
+* Initial supply - Initial supply of tokens.
 
 E.g. following code snippet shows placeholders for the Standard token template:
 
