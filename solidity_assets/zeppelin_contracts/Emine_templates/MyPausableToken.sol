@@ -1,6 +1,6 @@
 pragma solidity ^0.4.18;
 
-import "../../token/ERC20/PausableToken.sol";
+import "../token/ERC20/PausableToken.sol";
 
 /**
  * @title E-Mine Pausable Token Template

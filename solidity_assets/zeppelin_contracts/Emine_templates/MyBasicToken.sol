@@ -1,6 +1,6 @@
 pragma solidity ^0.4.18;
 
-import "../../token/ERC20/BasicToken.sol";
+import "../token/ERC20/BasicToken.sol";
 
 /**
  * @title E-Mine Basic Token Template

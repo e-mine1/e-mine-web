@@ -1,6 +1,6 @@
 pragma solidity ^0.4.18;
 
-import "../../token/ERC20/StandardToken.sol";
+import "../token/ERC20/StandardToken.sol";
 
 /**
  * @title E-Mine Standard Token Template
@@ -20,5 +20,4 @@ contract MyStandardToken is StandardToken {
     balances[msg.sender] = INITIAL_SUPPLY;
     Transfer(0x0, msg.sender, INITIAL_SUPPLY);
   }
-
 }
