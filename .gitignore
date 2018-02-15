@@ -1,3 +1,5 @@
 .idea
 solidity/build
 solidity/node_modules/
+truffle_workdir
+solidity/migrations
