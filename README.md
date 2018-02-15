@@ -70,9 +70,11 @@ REST API is implemented as a [python script](https://github.com/e-mine1/e-mine-w
 |                    |         | symbol=[string]             |  "key": [uuid],                              |
 |                    |         | maxSupply=[integer]         |  "status":                                   |
 |                    |         | decimals=[integer]          |     "success" or "pending" or "failure",     | 
-|                    |         | genesisSupply=[integer]     |  "token_abi": [base64 encoded JSON value]}   |
+|                    |         | genesisSupply=[integer]     |  "token_abi": [base64 encoded JSON value],   |
+|                    |         |                             |  "token_addr",                               |
+|                    |         |                             |  "updated": [datetime],                      |
+|                    |         |                             |  "version": 1}                               |
 |                    |         |                             |                                              |
-
 
 ## Useful links
 - https://ethereum.stackexchange.com/questions/23279/steps-to-deploy-a-contract-using-metamask-and-truffle
