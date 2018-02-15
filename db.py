@@ -25,6 +25,7 @@ def create_request_token():
         'updated': date,
         'version': 0
     }
+    print('create request token: ' + key)
     db.insert(entry)
     return entry
 
@@ -47,3 +48,6 @@ def update_token(key, status=None, token_addr=None):
 
         if change:
             token.updated = _get_now()
+            token.version = token.version + 1
+            print('updated request token: ' + key)
+            db.update(token, Creation.key == key)

@@ -6,59 +6,83 @@ from distutils.dir_util import copy_tree
 
 TEMPLATE_SRC_LOCATION = 'solidity_assets/contract_template.sol'
 
+HOME = os.path.dirname(os.path.realpath(__file__))
+
+SOLIDITY_TEMPLATE_ROOT = os.path.join(HOME, './zeppelin_contracts/Emine_templates')
 TRUFFLE_BIN = '/usr/local/bin/truffle'
-TRUFFLE_TEMPLATE = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'truffle_template')
-TRUFFLE_WORKDIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'truffle_workdir')
+TRUFFLE_TEMPLATE_DIR = os.path.join(HOME, 'truffle_template')
+TRUFFLE_WORK_DIR = os.path.join(HOME, 'truffle_workdir')
+TRUFFLE_DEPLOY_SCRIPT = os.path.join(HOME, 'solidity_assets/1_initial_migration.js')
 
 
-def generateSolFile(tokenName, symbol, maxSupply, decimals, genesisSupply):
-    map = {"tokenName": str(tokenName),
-           'symbol': str(symbol),
-           'maxSupply': str(maxSupply),
-           'decimals': str(decimals),
-           'genesisSupply': str(genesisSupply)
-           }
+def replace_placeholders(keyword_map, source_path):
+    source = ''
 
-    path = os.path.join(os.path.dirname(os.path.realpath(__file__)), TEMPLATE_SRC_LOCATION)
-    source = open(path, 'r').read()
+    print('reading file: ' + source_path)
+    with open(source_path, 'r') as f:
+        source = f.read()
+    pass
 
-    for placeholder in map.keys():
-        value = map.get(placeholder)
+    for placeholder in keyword_map.keys():
+        value = keyword_map.get(placeholder)
         source = source.replace('%%{}%%'.format(placeholder), value)
         logging.info('replacing {} with {} in {}'.format(placeholder, value, path))
 
     return source
 
+
+def replace_placeholders_file(keyword_map, source_path, target_path):
+    source = replace_placeholders(keyword_map, source_path)
+
+    print('writing file: ' + target_path)
+    with open(target_path, 'w') as f:
+        f.write(source)
     pass
+
 
 def on_compiled(success, contract_addr):
     print('contract deployed')
     pass
 
-def compile_sol(sol_code):
-    t = CompileThread(sol_code, on_compiled)
+
+def compile_sol(contract_template_path, contract_name, contrat_template_map):
+    t = CompileThread(contract_template_path, contract_name, contrat_template_map, on_compiled)
     t.thread.start()
     pass
 
 
 class CompileThread:
-    def __init__(self, solcode, callback_on_done):
-        self.source = solcode
+    def __init__(self, contract_template_path, contract_name, contract_template_map, callback_on_done):
+        self.contract_template_path = contract_template_path
+        self.contract_name = contract_name
         self.callback_on_done = callback_on_done
+        self.contract_template_map = contract_template_map
         self.thread = threading.Thread(target=self.run, args=())
 
     def run(self):
         ts = int(time.time())
         compilation_dir = 'truffle_' + str(ts)
-        working_dir = os.path.join(TRUFFLE_WORKDIR, compilation_dir)
-        copy_tree(TRUFFLE_TEMPLATE, working_dir)
+        working_dir = os.path.join(TRUFFLE_WORK_DIR, compilation_dir)
+
         print('copying to ' + working_dir)
-
-        with open(os.path.join(working_dir, 'contracts/Migrations.sol'), 'w') as f:
-            f.write(self.source)
-        pass
-
+        copy_tree(TRUFFLE_TEMPLATE_DIR, working_dir)
         os.chdir(working_dir)
+
+        deploy_script = os.path.join(working_dir, 'migrations/1_initial_migrations.js')
+        replace_placeholders_file({
+            'fileName': self.contract_name
+        }, deploy_script, deploy_script)
+
+        contract_path = os.path.join(working_dir, './zeppelin_contracts/Emine_templates/ERC20/{}.sol'
+                                     .format(self.contract_name))
+
+        replace_placeholders_file(self.contract_template_map,
+                                  self.contract_template_path, contract_path)
+
+        # with open(os.path.join(working_dir, 'contracts/{}.sol'.format(self.source_name)), 'w') as f:
+        #     f.write(self.source)
+        # pass
+
 
         compile_code = os.system("{} compile >> {}/log.txt".format(TRUFFLE_BIN, working_dir))
         print('complation finished with code ' + str(compile_code))
@@ -80,9 +104,24 @@ class CompileThread:
 
 
 if __name__ == '__main__':
-    src = generateSolFile('name', 'symbol', 1000, 0, 10)
+    tokenName = 'emine'
+    symbol = 'emine'
+    maxSupply = 1000
+    decimals = 0
+    genesisSupply = 1000
 
-    compile_sol(src)
+    map = {"tokenName": str(tokenName),
+           'symbol': str(symbol),
+           'maxSupply': str(maxSupply),
+           'decimals': str(decimals),
+           'genesisSupply': str(genesisSupply)
+           }
+
+    contract_template_name = 'MyBasicToken'
+    contract_template_path = os.path.join(SOLIDITY_TEMPLATE_ROOT, 'ERC20/MyBasicToken.sol')
+    compile_sol(contract_template_path, contract_template_name, map)
+
+# compile_sol(src)
 
 
 
