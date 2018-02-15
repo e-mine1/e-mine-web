@@ -31,7 +31,7 @@ following parameters are supported
 
 E.g. following code snippet shows placeholders for the Standard token template:
 
-```python
+```
 string public constant name = "%token_name%";
 string public constant symbol = "%token_symbol%"; 
 uint8 public constant decimals = %token_decimals%;
@@ -40,7 +40,7 @@ uint256 public constant INITIAL_SUPPLY = %token_initial_supply%;
 
 Provided values can then be used in smart contract functions, such as in the following example of *MyStandardToken()* constructor that gives initial coin supply to *msg.sender*:
 
-```python
+```
 function MyStandardToken() public {
    totalSupply_ = INITIAL_SUPPLY;
    balances[msg.sender] = INITIAL_SUPPLY;
@@ -56,7 +56,7 @@ REST API is implemented as a [python script](https://github.com/e-mine1/e-mine-w
 
 | API URL            | Method  | Required/Optional variables | Expected response                                             |
 |:------------------ |:-------:|:--------------------------- |:------------------------------------------------------------- | 
-| /api/requests/<id> | GET     | id=[integer]                |                                                               |
+| /api/requests/<id> | GET     | id=[integer]                |  **<TO-DO>**                                                              |
 | /api/tokens/types  | GET     |                             | { "types": [                                                  |
 |                    |         |                             |    &nbsp; &nbsp; "MyBasicToken",                              |
 |                    |         |                             |    &nbsp; &nbsp; "MyBurnableToken",                           |
@@ -72,6 +72,20 @@ REST API is implemented as a [python script](https://github.com/e-mine1/e-mine-w
 |                    |         | decimals=[integer]          |  &nbsp; &nbsp; "token_abi": [base64 encoded JSON value ]}     |                                              | 
 |                    |         | genesisSupply=[integer]     |                                                               |
 
+
+## Installation
+
+# Installing prerequisites
+
+`$ pip install -r requirements.txt`
+
+# Install Truffle
+
+`$ npm install -g truffle`
+
+## Running the examples
+
+<TO-DO>
 
 ## Useful links
 - https://ethereum.stackexchange.com/questions/23279/steps-to-deploy-a-contract-using-metamask-and-truffle
