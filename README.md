@@ -1,5 +1,9 @@
 # E-Mine Token Generator
 
+E-Mine Token Genarator is a web service through which users can submit requests for creation and deployment of their smart contracts. It is built using [Flask](http://flask.pocoo.org/) and can be accessed through a REST API. User makes a request for a smart contract and provides relevant parameters. E-Mine Token Generator then prepares an actual smart contract by filling a template of Solidity code, compiles it and broadcasts it on Ethereum network. Currently it supports compilation and deployment of several standard tokens which are available in [OpenZeppelin](https://openzeppelin.org/) framework. For compilation and deployment on the server side we used [Truffle](http://truffleframework.com/) - a [Node.js](https://nodejs.org/en/) based development framework for Ethereum smart contracts. In order to test our system we set up a local Ethereum network using [Ganache](http://truffleframework.com/ganache/), a tool which is a part of the Truffle framework. Ganache features an internal Javascript implementation of Ethereum blockchain, as well as built-in blockchain explorer that allows easy testing and debugging of distributed applications.
+
+<img src="docs/e-mine-web architecture.png" width="900">
+
 ## Token Templates
 
 As a basis for token creation we use [OpenZeppelin](https://github.com/OpenZeppelin/zeppelin-solidity), a framework to build secure smart contracts on Ethereum.
