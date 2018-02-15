@@ -1,7 +1,7 @@
 var HDWalletProvider = require("truffle-hdwallet-provider");
 
 var infura_apikey = "9JcJLIaVEaZ7KQrnrJSj";
-var mnemonic = "trash zero adjust delay host hamster pool away vague split chronic lake";
+  var mnemonic = "trash zero adjust delay host hamster pool away vague split chronic lake";
 
 module.exports = {
   networks: {

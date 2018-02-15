@@ -32,6 +32,7 @@ def tokens_create():
     decimals = payload.get('decimals')
     genesisSupply = payload.get('genesisSupply')
 
+
     solFile = generateSolFile(tokenName, symbol, maxSupply, decimals, genesisSupply)
     solBinPath = compileSol(solFile)
 

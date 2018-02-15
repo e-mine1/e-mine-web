@@ -16,4 +16,5 @@ $ pip install -r requirements.txt
 - decimals
 - genesisSupply
 
-## 
+## Useful links
+- https://ethereum.stackexchange.com/questions/23279/steps-to-deploy-a-contract-using-metamask-and-truffle
