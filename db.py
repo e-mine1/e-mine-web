@@ -11,18 +11,18 @@ Creation = Query()
 
 
 def _get_now():
-    return datetime.now(timezone.utc).astimezone().isoformat()
+    return str(datetime.now(timezone.utc).isoformat())
 
 
 def create_request_token():
-    key = uuid.uuid4()
-    date = _get_now(),
+    key = str(uuid.uuid4())
+    d = str(_get_now())
     entry = {
         'key': key,
         'status': 'pending',
         'token_addr': None,
-        'created': date,
-        'updated': date,
+        'created': d,
+        'updated': d,
         'version': 0
     }
     print('create request token: ' + key)
@@ -31,7 +31,17 @@ def create_request_token():
 
 
 def has_token(key):
-    return db.search(Creation.key == key) is not None
+    res = db.search(Creation.key == key)
+
+    return len(res) > 0
+
+
+def get_token(key):
+    res = db.search(Creation.key == key)
+    if len(res) > 0:
+        return res[0]
+    else:
+        return None
 
 
 def update_token(key, status=None, token_addr=None):
@@ -40,14 +50,14 @@ def update_token(key, status=None, token_addr=None):
         token = results[0]
         change = False
         if status:
-            token.status = status
+            token['status'] = status
             change = True
         if token_addr:
-            token.token_add = token_addr
+            token['token_addr'] = token_addr
             change = True
 
         if change:
-            token.updated = _get_now()
-            token.version = token.version + 1
+            token['updated'] = _get_now()
+            token['version'] = int(token['version']) + 1
             print('updated request token: ' + key)
             db.update(token, Creation.key == key)

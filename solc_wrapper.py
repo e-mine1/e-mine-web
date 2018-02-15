@@ -3,6 +3,7 @@ import logging
 import time
 import threading
 from distutils.dir_util import copy_tree
+from db import create_request_token, update_token, has_token
 
 TEMPLATE_SRC_LOCATION = 'solidity_assets/contract_template.sol'
 
@@ -41,22 +42,26 @@ def replace_placeholders_file(keyword_map, source_path, target_path):
 
 
 def on_compiled(success, contract_addr):
-    print('contract deployed')
+    print('contract deployed, status: ' + str(success) + ', addr: ' + contract_addr)
     pass
 
 
-def compile_sol(contract_template_path, contract_name, contrat_template_map):
-    t = CompileThread(contract_template_path, contract_name, contrat_template_map, on_compiled)
+def compile_sol(contract_template_path, contract_name, contrat_template_map, callback_on_done, request_id):
+    t = CompileThread(contract_template_path, contract_name,
+                      contrat_template_map, callback_on_done, request_id)
     t.thread.start()
     pass
 
 
 class CompileThread:
-    def __init__(self, contract_template_path, contract_name, contract_template_map, callback_on_done):
+    def __init__(self, contract_template_path, contract_name, contract_template_map, callback_on_done,
+                 request_id):
         self.contract_template_path = contract_template_path
         self.contract_name = contract_name
         self.callback_on_done = callback_on_done
+        self.request_id = request_id
         self.contract_template_map = contract_template_map
+
         self.thread = threading.Thread(target=self.run, args=())
 
     def run(self):
@@ -73,7 +78,7 @@ class CompileThread:
             'fileName': self.contract_name
         }, deploy_script, deploy_script)
 
-        contract_path = os.path.join(working_dir, './zeppelin_contracts/Emine_templates/{}.sol'
+        contract_path = os.path.join(working_dir, 'contracts/zeppelin_contracts/Emine_templates/{}.sol'
                                      .format(self.contract_name))
 
         replace_placeholders_file(self.contract_template_map,
@@ -82,8 +87,6 @@ class CompileThread:
         # with open(os.path.join(working_dir, 'contracts/{}.sol'.format(self.source_name)), 'w') as f:
         #     f.write(self.source)
         # pass
-
-        raise Exception()
 
 
         compile_code = os.system("{} compile >> {}/log.txt".format(TRUFFLE_BIN, working_dir))
@@ -102,7 +105,7 @@ class CompileThread:
             success = True
 
         if self.callback_on_done is not None:
-            self.callback_on_done(success=success, contract_addr=addr)
+            self.callback_on_done(success, addr, self.request_id)
 
 
 if __name__ == '__main__':
@@ -112,16 +115,15 @@ if __name__ == '__main__':
     decimals = 0
     genesisSupply = 1000
 
-    map = {"tokenName": str(tokenName),
-           'symbol': str(symbol),
-           'maxSupply': str(maxSupply),
-           'decimals': str(decimals),
-           'genesisSupply': str(genesisSupply)
+    map = {"token_name": str(tokenName),
+           'token_symbol': str(symbol),
+           'token_decimals': str(decimals),
+           'token_initial_supply': str(genesisSupply)
            }
 
     contract_template_name = 'MyStandardToken'
     contract_template_path = os.path.join(SOLIDITY_TEMPLATE_ROOT, 'MyStandardToken.sol')
-    compile_sol(contract_template_path, contract_template_name, map)
+    compile_sol(contract_template_path, contract_template_name, map, on_compiled)
 
 # compile_sol(src)
 

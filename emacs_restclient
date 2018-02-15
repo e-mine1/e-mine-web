@@ -9,9 +9,14 @@ Content-Type: application/json
         "tokenName": "tokenName",
         "symbol": "symbol",
         "maxSupply": 1000,
-        "decimals": 100,
+        "decimals": 0,
         "genesisSupply": 999
 }
+
+#
+#
+
+GET http://127.0.0.1:5000/api/requests/02306730-a09d-42f8-af9a-f2ce2e8213b3
 
 #
 #
