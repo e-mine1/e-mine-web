@@ -73,17 +73,17 @@ REST API is implemented as a [python script](https://github.com/e-mine1/e-mine-w
 |                    |         | genesisSupply=[integer]     |                                                               |
 
 
-## Installation
+# Installation
 
-# Installing prerequisites
+## Installing prerequisites
 
 `$ pip install -r requirements.txt`
 
-# Install Truffle
+## Install Truffle
 
 `$ npm install -g truffle`
 
-## Running the examples
+# Running the examples
 
 **TO-DO**
 
