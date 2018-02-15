@@ -18,7 +18,34 @@ Following token templates are provided:
 | ERC827   | Generic ERC827 token    | ERC827 implementation - ERC20 standard with extra methods to transfer value  | 
 |          |                         | and data and execute calls in transfers and approvals                        |
 
+Each template contains placeholders for custom user parameters provided by the client application. Currently, the 
+following parameters are supported
+* Token name
+* Token symbol
+* Decimals
+* Initial supply
 
+E.g. following code snippet shows placeholders for the Standard token template:
+
+```
+string public constant name = "%token_name%";
+string public constant symbol = "%token_symbol%"; 
+uint8 public constant decimals = %token_decimals%;
+uint256 public constant INITIAL_SUPPLY = %token_initial_supply%;
+```
+
+Provided values can then be used in smart contract functions, such as in the following example of MyStandardToken constructor that gives initial coin supply to msg.sender:
+
+```
+function MyStandardToken() public {
+   totalSupply_ = INITIAL_SUPPLY;
+   balances[msg.sender] = INITIAL_SUPPLY;
+   Transfer(0x0, msg.sender, INITIAL_SUPPLY);
+}
+```
+
+
+Each template can be easily extended to introduce new smart contract (token) parameters and functions according to the specific user requirements.
 
 ## how to run
 ```
