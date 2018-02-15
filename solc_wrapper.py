@@ -8,7 +8,7 @@ TEMPLATE_SRC_LOCATION = 'solidity_assets/contract_template.sol'
 
 HOME = os.path.dirname(os.path.realpath(__file__))
 
-SOLIDITY_TEMPLATE_ROOT = os.path.join(HOME, './zeppelin_contracts/Emine_templates')
+SOLIDITY_TEMPLATE_ROOT = os.path.join(HOME, './solidity_assets/zeppelin_contracts/Emine_templates')
 TRUFFLE_BIN = '/usr/local/bin/truffle'
 TRUFFLE_TEMPLATE_DIR = os.path.join(HOME, 'truffle_template')
 TRUFFLE_WORK_DIR = os.path.join(HOME, 'truffle_workdir')
@@ -25,8 +25,8 @@ def replace_placeholders(keyword_map, source_path):
 
     for placeholder in keyword_map.keys():
         value = keyword_map.get(placeholder)
-        source = source.replace('%%{}%%'.format(placeholder), value)
-        logging.info('replacing {} with {} in {}'.format(placeholder, value, path))
+        source = source.replace('%{}%'.format(placeholder), value)
+        print('replacing {} with {} in {}'.format(placeholder, value, source_path))
 
     return source
 
@@ -68,12 +68,12 @@ class CompileThread:
         copy_tree(TRUFFLE_TEMPLATE_DIR, working_dir)
         os.chdir(working_dir)
 
-        deploy_script = os.path.join(working_dir, 'migrations/1_initial_migrations.js')
+        deploy_script = os.path.join(working_dir, 'migrations/1_initial_migration.js')
         replace_placeholders_file({
             'fileName': self.contract_name
         }, deploy_script, deploy_script)
 
-        contract_path = os.path.join(working_dir, './zeppelin_contracts/Emine_templates/ERC20/{}.sol'
+        contract_path = os.path.join(working_dir, './zeppelin_contracts/Emine_templates/{}.sol'
                                      .format(self.contract_name))
 
         replace_placeholders_file(self.contract_template_map,
@@ -82,6 +82,8 @@ class CompileThread:
         # with open(os.path.join(working_dir, 'contracts/{}.sol'.format(self.source_name)), 'w') as f:
         #     f.write(self.source)
         # pass
+
+        raise Exception()
 
 
         compile_code = os.system("{} compile >> {}/log.txt".format(TRUFFLE_BIN, working_dir))
@@ -117,8 +119,8 @@ if __name__ == '__main__':
            'genesisSupply': str(genesisSupply)
            }
 
-    contract_template_name = 'MyBasicToken'
-    contract_template_path = os.path.join(SOLIDITY_TEMPLATE_ROOT, 'ERC20/MyBasicToken.sol')
+    contract_template_name = 'MyStandardToken'
+    contract_template_path = os.path.join(SOLIDITY_TEMPLATE_ROOT, 'MyStandardToken.sol')
     compile_sol(contract_template_path, contract_template_name, map)
 
 # compile_sol(src)

@@ -1,4 +1,4 @@
-var Deploy = artifacts.require("././zeppelin_contracts/Emine_templates/ERC20/%file_name%.sol");
+var Deploy = artifacts.require("././zeppelin_contracts/Emine_templates/%fileName%.sol");
 var fs = require('fs');
 
 module.exports = function (deployer) {
