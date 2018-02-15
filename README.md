@@ -4,7 +4,7 @@
 
 As a basis for token creation we use [OpenZeppelin](https://github.com/OpenZeppelin/zeppelin-solidity), a framework to build secure smart contracts on Ethereum.
 For each token type a template is provided, implemented as an extended class of corresponding OpenZeppelin token implementation.
-Following token templates are provided:
+Following [token templates](https://github.com/e-mine1/e-mine-web/tree/master/solidity_assets/zeppelin_contracts/Emine_templates) are provided:
 
 | Standard |      Token              | Description                                                                  |
 |:-------- |:----------------------- |:---------------------------------------------------------------------------- | 
@@ -46,21 +46,31 @@ function MyStandardToken() public {
 
 Each template can be easily extended to introduce new smart contract (token) parameters and functions according to the specific user requirements.
 
-## how to run
-```
-$ pip install -r requirements.txt
+#REST API
 
-```
+REST API is implemented as a [python script](https://github.com/e-mine1/e-mine-web/blob/master/emine_web.py) with the following supported operations:
 
+| API URL            | Method  | Required/Optional variables | Expected response                            |
+|:------------------ |:-------:|:--------------------------- |:-------------------------------------------  | 
+| /api/requests/<id> | GET     | id=[integer]                |                                              |
+| /api/tokens/types  | GET     |                             | { "types": [                                 |
+|                    |         |                             |    "MyBasicToken",                           |
+|                    |         |                             |    "MyBurnableToken",                        |
+|                    |         |                             |    "MyCappedToken",                          |
+|                    |         |                             |    "MyERC721Token",                          |
+|                    |         |                             |    "MyERC827Token",                          |
+|                    |         |                             |    "MyMintableToken",                        |
+|                    |         |                             |    "MyPausableToken",                        |
+|                    |         |                             |    "MyStandardToken" ]}                      |
+|                    |         |                             |                                              |
+|                    |         |                             |                                              |
+| /api/tokens/create | POST    | tokenName=[string]          | {"created": [datetime],                      |
+|                    |         | symbol=[string]             |  "key": [uuid],                              |
+|                    |         | maxSupply=[integer]         |  "status":                                   |
+|                    |         | decimals=[integer]          |     "success" or "pending" or "failure",     | 
+|                    |         | genesisSupply=[integer]     |  "token_abi": [base64 encoded JSON value]}   |
+|                    |         |                             |                                              |
 
-#API
-
-## POST /api/tokens/create
-- tokenName: string
-- symbol: string
-- maxSupply
-- decimals
-- genesisSupply
 
 ## Useful links
 - https://ethereum.stackexchange.com/questions/23279/steps-to-deploy-a-contract-using-metamask-and-truffle
