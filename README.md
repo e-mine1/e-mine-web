@@ -112,5 +112,6 @@ $ npm install -g truffle
 # fire up local dev server
 $ ./run.sh
 
+# run Ganache
 ```
 The E-Mine REST API is exposed at localhost:5000/api/.
