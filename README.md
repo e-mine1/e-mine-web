@@ -90,7 +90,8 @@ If a response code is not 200, the json response contains a field `error` with t
 We extended an existing Android application (see https://github.com/e-mine1/GenesisApp) to test the API.
 A demo video can be seen below.
 
-<a href="https://drive.google.com/open?id=1nSEx-kJofXpJGVF96o5UcC-vv0UKdlrh"><img src="docs/emine-android-app.jpg" height="300"></a>
+<a href="https://drive.google.com/open?id=1nSEx-kJofXpJGVF96o5UcC-vv0UKdlrh">
+   <img src="docs/emine-android-app.jpg" height="500"></a>
 
 ## Installation
 
