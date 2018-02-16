@@ -58,7 +58,7 @@ REST API is implemented as a [python script](https://github.com/e-mine1/e-mine-w
 
 | API URL            | Method  | Required/Optional variables | Expected response                            |
 |:------------------ |:-------:|:--------------------------- |:-------------------------------------------  | 
-| /api/requests/<id> | GET     | id=[integer]                |                                              |
+| /api/requests/<id> | GET     | id=[uuid]                   |                                              |
 | /api/tokens/types  | GET     |                             | { "types": [                                 |
 |                    |         |                             |    "MyBasicToken",                           |
 |                    |         |                             |    "MyBurnableToken",                        |
@@ -78,15 +78,38 @@ REST API is implemented as a [python script](https://github.com/e-mine1/e-mine-w
 |                    |         |                             |  "version": 1}                               |
 |                    |         |                             |                                              |
 
+`/api/tokens/create` is called to compile and deploy a new smart contract to the network. With the `key` 
+field of the response, `/api/requests/<key>` can be called to obtain operation results of the process.
+Once the smart contract is deployed, `/api/requests/<key>` will contain the contract address `token_addr`
+and token ABI `token_abi` in the response.
+
+
+### HTTP Return code conventions
+Response code for successfull requests are always 200. 
+If a response code is not 200, the json response contains a field `error` with the error message.
+
+###
+
 # Installation
 
 ## Installing prerequisites
+- Python3+, pip3
+- nodejs, npm
+- Ganache: http://truffleframework.com/ganache/
 
-`$ pip install -r requirements.txt`
+```
+# install pip dependencies
+$ pip install -r requirements.txt
+   
+# install truffle
+$ npm install -g truffle
+  
+# fire up local dev server at localhost:5000
+$ ./run.sh
+  
+# the e-mine rest api is exposed at localhost:5000/api/
 
-## Install Truffle
-
-`$ npm install -g truffle`
+````
 
 # Running the examples
 

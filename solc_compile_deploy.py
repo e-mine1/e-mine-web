@@ -111,7 +111,9 @@ class CompileThread:
 
 
 if __name__ == '__main__':
+    #
     # this is just test code
+    #
     tokenName = 'emine'
     symbol = 'emine'
     maxSupply = 1000

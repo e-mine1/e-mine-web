@@ -22,9 +22,6 @@ def requests_status(id):
     token = db.get_token(id)
     return jsonify(token), 200
 
-# @app.route('/api/tokens/types', methods=['GET'])
-# def tokens_addr('/api/tokens/<addr>'):
-#     pass
 
 @app.route('/api/tokens/types', methods=['GET'])
 def tokens_meta_types():
