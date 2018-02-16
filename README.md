@@ -95,7 +95,7 @@ A demo video can be seen below.
 
 ## Installation
 
-### Installing prerequisites
+### Installing Prerequisites
 - Python3+, pip3
 - nodejs, npm
 - Ganache: http://truffleframework.com/ganache/
@@ -108,7 +108,7 @@ $ pip install -r requirements.txt
 $ npm install -g truffle
 ````
 
-### Running the backend
+### Running the Backend
 ```
 # fire up local dev server
 $ ./run.sh
@@ -116,3 +116,8 @@ $ ./run.sh
 # run Ganache
 ```
 The E-Mine REST API is exposed at localhost:5000/api/.
+
+### Source Files
+- `emine_web.py`: REST backend
+- `solc_compile_deploy.py`: modules to compile and deploy contracts
+- `db.py`: database wrapper
