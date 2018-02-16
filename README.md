@@ -78,42 +78,39 @@ REST API is implemented as a [python script](https://github.com/e-mine1/e-mine-w
 |                    |         |                             |  "version": 1}                               |
 |                    |         |                             |                                              |
 
-`/api/tokens/create` is called to compile and deploy a new smart contract to the network. With the `key` 
-field of the response, `/api/requests/<key>` can be called to obtain operation results of the process.
-Once the smart contract is deployed, `/api/requests/<key>` will contain the contract address `token_addr`
-and token ABI `token_abi` in the response.
-
+The endpoint `/api/tokens/create` is called to compile and deploy a new smart contract to the network. With the `key` 
+field of the response, the endpoint `/api/requests/<key>` can be called to obtain status results.
+On deployment success, the response contains the contract address (`token_addr`) and token ABI (`token_abi`).
 
 ### HTTP Return code conventions
 Response code for successfull requests are always 200. 
 If a response code is not 200, the json response contains a field `error` with the error message.
 
-###
+## Mobile Client
+We extended an existing Android application (see https://github.com/e-mine1/GenesisApp) to test the API.
+A demo video can be seen below.
 
-# Installation
+<a href="https://drive.google.com/open?id=1nSEx-kJofXpJGVF96o5UcC-vv0UKdlrh"><img src="docs/emine-android-app.jpg" height="300"></a>
 
-## Installing prerequisites
+## Installation
+
+### Installing prerequisites
 - Python3+, pip3
 - nodejs, npm
 - Ganache: http://truffleframework.com/ganache/
 
-```
+```bash
 # install pip dependencies
 $ pip install -r requirements.txt
    
 # install truffle
 $ npm install -g truffle
-  
-# fire up local dev server at localhost:5000
-$ ./run.sh
-  
-# the e-mine rest api is exposed at localhost:5000/api/
-
 ````
 
-# Running the examples
+### Running the backend
+```
+# fire up local dev server
+$ ./run.sh
 
-**TO-DO**
-
-## Useful links
-- https://ethereum.stackexchange.com/questions/23279/steps-to-deploy-a-contract-using-metamask-and-truffle
+```
+The E-Mine REST API is exposed at localhost:5000/api/.
